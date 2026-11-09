@@ -1,0 +1,15 @@
+name: artifact-demo
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          mkdir out
+          dd if=/dev/urandom of=out/1gb.bin bs=1M count=1024
+      - uses: actions/upload-artifact@v7
+        with:
+          name: big-artifact
+          path: out/1gb.bin
+          compression-level: 0
+          retention-days: 1
